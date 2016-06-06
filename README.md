@@ -1,6 +1,3 @@
-# DEPRECIATED
-Use https://github.com/MYOB-Technology/docker-images/tree/master/scala-play instead
+# I will continue to maintain the docker-scala-play (https://github.com/whence/docker-scala-play)
 
-# docker-images
-
-Dockerfiles for https://hub.docker.com/r/myobplatform/scala-play/
+More to come
