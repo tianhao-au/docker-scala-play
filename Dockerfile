@@ -23,3 +23,5 @@ RUN cd /tmp/build && \
   (activator compile || activator compile || activator compile) && \
   (activator test:compile || activator test:compile || activator test:compile) && \
   rm -rf /tmp/build
+
+CMD ["activator"]
