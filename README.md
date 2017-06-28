@@ -5,7 +5,7 @@
 2. Docker image for Scala, Play framework and SBT project with different versions
 
 ## How to use in your Scala SBT project
-1. Choose a image tag, e.g `2.11.8-2.5.4-sbt-0.13.11` is highly recommended instead of `latest` version
+1. Choose a image tag, e.g `2.12.2-2.6.0-sbt-0.13.15` is highly recommended instead of `latest` version
 
 2. Sample of your minimal project structure
 
@@ -27,41 +27,43 @@
 3. Sample of your `Dockerfile` should be like:
 
   ```
-  FROM ysihaoy/scala-play:2.11.8-2.5.4-sbt-0.13.11
+  FROM ysihaoy/scala-play:2.12.2-2.6.0-sbt-0.13.15
 
   # caching dependencies
   COPY ["build.sbt", "/tmp/build/"]
   COPY ["project/plugins.sbt", "project/build.properties", "/tmp/build/project/"]
   RUN cd /tmp/build && \
-    activator compile && \
-    activator test:compile && \
+    sbt compile && \
+    sbt test:compile && \
     rm -rf /tmp/build
 
   # copy code
   COPY . /root/app/
   WORKDIR /root/app
-  RUN activator compile && activator test:compile
+  RUN sbt compile && sbt test:compile
 
   EXPOSE 9000
-  CMD ["activator"]
+  CMD ["sbt"]
   ```
 
-## Optimisation of the build
+## Optimisation of the build time
 In order to have fast CI (continuous integration) build process, sample of your `project/build.properties`, `project/plugins.sbt` and `build.sbt` should be like:
 1. `project/build.properties`
   ```
-  sbt.version = 0.13.11
+  sbt.version = 0.13.15
   ```
 
 2. `project/plugins.sbt`
   ```
   // The Play plugin
-  addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.5.4")
+  addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.6.0")
   ```
 
 3. `build.sbt`
   ```
-  scalaVersion := "2.11.8"
+  scalaVersion := "2.12.2"
   ```
+
+## Note: Since `activator` was EOL-ed on May 24, 2017, instead of using the Activator command, make sure you have sbt 0.13.13 (or higher), and use the “sbt new” command, providing the name of the template. Click [here](https://www.lightbend.com/community/core-tools/activator-and-sbt) to see more.
 
 ## Happy hacking Scala, Play framework and Docker

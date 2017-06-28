@@ -4,12 +4,10 @@ version := "1.0-SNAPSHOT"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
-scalaVersion := "2.11.8"
+resolvers += Resolver.sonatypeRepo("snapshots")
 
-libraryDependencies ++= Seq(
-  jdbc,
-  cache,
-  ws
-)
+scalaVersion := "2.12.2"
 
-resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
+libraryDependencies += guice
+libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.0.0" % Test
+libraryDependencies += "com.h2database" % "h2" % "1.4.194"

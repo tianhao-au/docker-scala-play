@@ -1,27 +1,30 @@
 FROM anapsix/alpine-java:jdk8
+MAINTAINER Tianhao Li <ysihaoy@gmail.com>
 
-# Install activator
-ENV ACTIVATOR_VERSION 1.3.10
+ENV SBT_VERSION 0.13.15
+ENV CHECKSUM 18b106d09b2874f2a538c6e1f6b20c565885b2a8051428bd6d630fb92c1c0f96
+
+# Install sbt
 RUN apk add --update bash curl openssl ca-certificates && \
-  curl -L -o /tmp/activator.zip \
-    https://downloads.typesafe.com/typesafe-activator/$ACTIVATOR_VERSION/typesafe-activator-$ACTIVATOR_VERSION-minimal.zip && \
-  openssl dgst -sha256 /tmp/activator.zip \
-    | grep '15352ce253aa804f707ef8be86390ee1ee91da4b78dbb2729ab1e9cae01d8937' \
+  curl -L -o /tmp/sbt.zip \
+    https://dl.bintray.com/sbt/native-packages/sbt/${SBT_VERSION}/sbt-${SBT_VERSION}.zip && \
+  openssl dgst -sha256 /tmp/sbt.zip \
+    | grep ${CHECKSUM} \
     || (echo 'shasum mismatch' && false) && \
-  mkdir -p /opt/activator && \
-  unzip /tmp/activator.zip -d /opt/activator && \
-  rm /tmp/activator.zip && \
-  chmod +x /opt/activator/activator-$ACTIVATOR_VERSION-minimal/bin/activator && \
-  ln -s /opt/activator/activator-$ACTIVATOR_VERSION-minimal/bin/activator /usr/bin/activator && \
+  mkdir -p /opt/sbt && \
+  unzip /tmp/sbt.zip -d /opt/sbt && \
+  rm /tmp/sbt.zip && \
+  chmod +x /opt/sbt/sbt/bin/sbt && \
+  ln -s /opt/sbt/sbt/bin/sbt /usr/bin/sbt && \
   rm -rf /tmp/* /var/cache/apk/*
 
-# Prebuild with activator
+# Prebuild with sbt
 COPY . /tmp/build/
 
-# activator sometimes failed because of network. retry 3 times.
+# sbt sometimes failed because of network. retry 3 times.
 RUN cd /tmp/build && \
-  (activator compile || activator compile || activator compile) && \
-  (activator test:compile || activator test:compile || activator test:compile) && \
+  (sbt compile || sbt compile || sbt compile) && \
+  (sbt test:compile || sbt test:compile || sbt test:compile) && \
   rm -rf /tmp/build
 
-CMD ["activator"]
+CMD ["sbt"]
