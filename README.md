@@ -5,7 +5,8 @@
 2. Docker image for Scala, Play framework and SBT project with different versions
 
 ## Supported tags (combinations of Scala, Play and SBT) and Dockerfile links
-* 2.12.3-2.6.2-sbt-0.13.15
+* 2.12.3-2.6.2-sbt-0.13.15,
+[Dockerfile](https://github.com/ysihaoy/docker-scala-play/blob/2.12.3-2.6.2-sbt-0.13.15/Dockerfile)
 
 * 2.12.2-2.6.0-sbt-0.13.15, [Dockerfile](https://github.com/ysihaoy/docker-scala-play/blob/2.12.2-2.6.0-sbt-0.13.15/Dockerfile)
 
@@ -14,7 +15,7 @@
 * 2.11.7-2.4.6-sbt-0.13.8, [Dockerfile](https://github.com/ysihaoy/docker-scala-play/blob/2.11.7-2.4.6-sbt-0.13.8/Dockerfile)
 
 ## How to use in your Scala SBT project
-1. Choose a image tag, e.g `2.12.2-2.6.0-sbt-0.13.15` is highly recommended instead of `latest` version
+1. Choose a image tag, e.g `2.12.3-2.6.2-sbt-0.13.15` is highly recommended instead of `latest` version
 
 2. Sample of your minimal project structure
 
