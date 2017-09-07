@@ -60,18 +60,18 @@
 In order to have fast CI (continuous integration) build process, sample of your `project/build.properties`, `project/plugins.sbt` and `build.sbt` should be like:
 1. `project/build.properties`
   ```
-  sbt.version = 0.13.15
+  sbt.version = 0.13.16
   ```
 
 2. `project/plugins.sbt`
   ```
   // The Play plugin
-  addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.6.0")
+  addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.6.3")
   ```
 
 3. `build.sbt`
   ```
-  scalaVersion := "2.12.2"
+  scalaVersion := "2.12.3"
   ```
 
 ## Note: Since `activator` was EOL-ed on May 24, 2017, instead of using the Activator command, make sure you have sbt 0.13.13 (or higher), and use the “sbt new” command, providing the name of the template. Click [here](https://www.lightbend.com/community/core-tools/activator-and-sbt) to see more.
