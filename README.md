@@ -60,13 +60,14 @@
 In order to have fast CI (continuous integration) build process, sample of your `project/build.properties`, `project/plugins.sbt` and `build.sbt` should be like:
 1. `project/build.properties`
   ```
-  sbt.version = 0.13.15
+  sbt.version = 0.13.17
   ```
 
 2. `project/plugins.sbt`
   ```
-  // The Play plugin
-  addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.6.0")
+  resolvers += "Typesafe repository" at "https://repo.typesafe.com/typesafe/releases/"
+
+  addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.7.3")
   ```
 
 3. `build.sbt`
